@@ -1,13 +1,12 @@
 ﻿// client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-// 0. 데스크톱 마법사 -> 데스크톱 어플리케이션 -> 솔루션 필터를 영어로 변경. 
-// 오늘 할거; 1. 주석보며 함수 내용 파악하고, seon 검색해서 winapi 적당히 예습해보기 
-//  ㄴ 메세지의 개념, 겟메세지를 픽메세지로 변경하기, wm_paint로 도형 그려보기, 핸들의 역할(HWND,hdc) 
-// 1.5. 질문한거 개념 정리 
-// 2. 악마성 에클레시아 리소스 nds factory로 추출하기. 
-// 커밋 테스트용 수정 
+// HWND는 윈도우를 만든 후 리턴되는 그의 주소값. HDC는 화면에 그려지는 리소스 (도형들). 이미지가 아님!!
 
 // 윈도우가 돌아가는 원리만 이해하고 넘아가도 OK. (한줄씩 실행하면서, 어떤 작업이 이뤄지는지 확인할 것) 
-// peekmassage 변경하기, 도형 그려보기 
+// peekmassage 변경하기, 도형 그려보기 : 함
+// 핸들의 역할(HWND,hdc) 기억하기 
+// 리소스 뷰는 컨트롤 시프트 e
+
+// 비주얼 스튜디오 자체에서 리포지토리 만드는 법 배웠음. 우측 하단에서 클릭하고 만들기. 
 
 #include "framework.h"
 #include "client.h"
@@ -80,23 +79,42 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
     // ******* 이 부분을 get message에서 peekmessage로 변경하였음 ******* 
-    while (GetMessage(&msg, nullptr, 0, 0))
+    //while (GetMessage(&msg, nullptr, 0, 0))
+    //{
+    //    if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) // 메세지의 내용을 번역하는 함수 
+    //    {
+    //        TranslateMessage(&msg); //무한
+    //        DispatchMessage(&msg); //반복
+    //    }
+    //}
+    // return (int) msg.wParam; 
+
+    //  ** peekmessage로 변경하였음 **
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) // 메세지의 내용을 번역하는 함수 
+
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg); //무한
-            DispatchMessage(&msg); //반복
+            if (msg.message == WM_QUIT) break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+        else
+        {
+
+        }
+
     }
 
-    return (int) msg.wParam;
+    return (int) msg.wParam;  // 메인 함수의 메세지를 받아주는 부분. 
 
     // get message: 메세지큐에 메세지가 있어야만 발생한다. 
     // peek message: 메세지큐에 메세지가 없어도 진행된다. 
-
 }
-
-
 
 //
 //  함수: MyRegisterClass()
@@ -115,7 +133,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CLIENT));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hCursor        = LoadCursor(nullptr, IDC_CROSS); // IDC_ARROW (드래그 ->f12-> 원하는 명령어 찾기) 
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_CLIENT);
     wcex.lpszClassName  = szWindowClass;
@@ -140,13 +158,17 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // ★윈도우 창을 만드는 함수: 윈도우 클래스, 이름...
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-    //  CW_USEDEFAULT, 0, 윈도우의 좌표계: 좌측 상단이 0이다 (배열과 동일): 이건 운영체제마다 다름. 
-    //  ㄴ 게임 창이 윈도우의 어디에서 뜰지, 라는 뜻. 
-   //  CW_USEDEFAULT, 0,: 실제 게임 화면의 크기 
-   // ex. CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,  :: 0,0,1600,900 : 0,0위치에 1600*900의 크기의 창을 만들어줘. 
+      230, 50, 900, 500, nullptr, nullptr, hInstance, nullptr);
+     //윈도우 창에서의 위지 / 콘솔창의 크기    
 
-   //szWindowClass, szTitle, : 솔루션의 이름, 콘솔창의 이름 
+  // 오리지널 코드: HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+  //   CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+
+     //szWindowClass, szTitle, : 솔루션의 이름, 콘솔창의 이름 
+    // 첫 CW_USEDEFAULT, 0 : 윈도우의 좌표 = 좌측 상단이 0이다 (배열과 동일) !!이건 운영체제마다 다름. 
+    //  ㄴ 게임 창이 윈도우의 어디에서 뜰지, 라는 뜻. 
+    // 두 CW_USEDEFAULT, 0,: 실제 게임 화면의 크기 
+   // ex. CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,  :: 0,0,1600,900 : 0,0위치에 1600*900의 크기의 창을 만들어줘. 
 
    // **: 대부분의 API는 사용자가 직접적으로 데이터에 접근해서 수정할 수 있는 권한을 주지 않는다. 
    // **: 설계구조 자체가, 메모리 자체를 만지는게 아니라. 이미 만들어진 함수를 통해 인자만 바꾸면 OK인 식으로.
@@ -202,8 +224,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps); // **hdc: 그림과 관련된 영역을 다루는 핸들. 
-            // ** 직사각형을 그려보자!!!! **
-            // Rectangle(hdc, 100, 100, 200, 200);
+
+            // ** 어몽어스같은거 그리기 **
+            // Rectangle(hdc, 200, 200, 100, 100); // 직사각형: 왼 위 우 아래 (내부 투명한거 아님) 
+
+            HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(255, 0, 0)); // 붉은색
+            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush); // 붉은색2
+
+
+            Ellipse(hdc, 300, 1300, 50, 50); // 동그라미: 왼 위 우 아래  // 왼쪽 귀 
+            Ellipse(hdc, 200,200,10,10); // 동그라미: 왼 위 우 아래  // 오른쪽 귀 
+       
+            SelectObject(hdc, oldBrush); 
+            DeleteObject(myBrush); 
+
+            Ellipse(hdc, 150, 150, 20, 20); // 붉은색 종료되었으니 하얀색 
 
             // 원리: 업데이트 윈도우에서, hdc를 이용해서 부름. 
 
