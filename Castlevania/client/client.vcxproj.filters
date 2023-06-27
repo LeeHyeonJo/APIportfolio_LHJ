@@ -4,11 +4,20 @@
     <Filter Include="Windows">
       <UniqueIdentifier>{0dc551c9-d521-4340-a226-4fa0eae9a11f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Windows\Header">
-      <UniqueIdentifier>{9c8d85d5-925e-4ce5-b427-7f4269179484}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Windows\Resource">
       <UniqueIdentifier>{95e96e19-5238-4ccd-a254-54dfdb856a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{3ac1bcdc-26d8-432a-83a1-b76d17aa2bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High level interface">
+      <UniqueIdentifier>{82968461-4a16-48da-9d4b-2d1e0ab88793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{b6cd9176-4e65-4992-9d70-d2f450856197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Header">
+      <UniqueIdentifier>{9c8d85d5-925e-4ce5-b427-7f4269179484}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -23,6 +32,15 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Engine\High level interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Commoninclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="consoleMath.h">
+      <Filter>Engine\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +57,9 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="console.cpp">
+      <Filter>Engine\High level interface</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
 </Project>

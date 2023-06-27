@@ -8,8 +8,14 @@
 
 // 비주얼 스튜디오 자체에서 리포지토리 만드는 법 배웠음. 우측 하단에서 클릭하고 만들기. 
 
+// ++ 오늘 구현할거: 키보드 입력에 따라서 공이 움직이고, 움직이는 구간에 따라서 검정색으로 그려지는것 
+
 #include "framework.h"
 #include "client.h"
+#include "console.h"
+
+console::Application application;
+// console::Application 이 크기를 가진 메모리를 할당. 그 이름은 어플리케이션 
 
 #define MAX_LOADSTRING 100 // 0. 배열의 크기가 최대 100이라는 뜻. 
 
@@ -90,6 +96,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // return (int) msg.wParam; 
 
     //  ** peekmessage로 변경하였음 **
+    // 메세지에서 걸리므로 f5여기에 걸고 넘기셈 
     while (true)
     {
 
@@ -105,7 +112,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-
+            // 게임 로직을 여기서 돌림
+            // Run 안에 렌더와 
+            application.Run(); 
         }
 
     }
