@@ -231,6 +231,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+// 여기로 들어온 이유: 윈도우 만드는 함수 "도중" 에 , 내부에 프로시저가 들어있어서 여기로 들어옴.
+// 그러면서 빙빙빙 돈 것. 그 후 intilaize 함수로 들어가서 초기화, 윈도우 화면을 띄워주게 된다. 
 {
     switch (message)
     {
