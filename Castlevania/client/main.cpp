@@ -13,10 +13,8 @@
 
 #include "framework.h"
 #include "client.h"
-#include "console.h"
+#include "console.h" // 게임 엔진 - 하이레벨 인터베이스의 헤더 
 
-console::Application application;
-// console::Application 이 크기를 가진 메모리를 할당. 그 이름은 어플리케이션 
 
 #define MAX_LOADSTRING 100 // 0. 배열의 크기가 최대 100이라는 뜻. 
 
@@ -27,6 +25,11 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 // 영어는 char 형(1바이트)로 전부 표현 가능
 // WCHAR은 2바이트 크기의 자료형. 한글,한자 등을 표현할 수 있다 (지금은 이것이 표준) 
 // WCHAR 형은 초기화할때 앞에 L을 붙인다. 
+
+console::Application application;  
+// console::Application 이 크기를 가진 메모리를 할당. 그 이름은 어플리케이션 
+// ㄴ 클래스의 객체를 전역변수로 선언한 것.
+
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -73,6 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
     MSG msg; // **메세지!
+    // queue<MSG>.msg 이 형태인 것. 
 
     // 기본 메시지 루프입니다:
     // **와일문을 돌면서, 메세지를 가져오는 함수 
@@ -103,9 +107,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            if (msg.message == WM_QUIT) break;
+            if (msg.message == WM_QUIT)
+            {
+                break;
+            }
 
-            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
             {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
@@ -113,11 +120,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            // 게임 로직을 여기서 돌림
-            // Run 안에 렌더와 
+            // ★게임 로직을 여기서 돌림
+            // Run 안에 렌더와 업데이트 함수가 들어있기에 돌 수 있는 것. 
             application.Run(); 
         }
 
+    }
+
+    // 메세지가 있는 동안에는 무한으로 돌고있음 
+    // 프로그램을 "끝내는 메세지" 도 있어야 함 ( == WM_QUIT) 
+    
+    if (msg.message == WM_QUIT)
+    {
+        // WM_QUIT라는 메세지를 받을 시, 
+        // 프로그램을 멈추고 종료하라는 기능을 여기에 구현할 것. 
     }
 
     return (int) msg.wParam;  // 메인 함수의 메세지를 받아주는 부분. 
@@ -169,9 +185,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // ★윈도우 창을 만드는 함수: 윈도우 클래스, 이름...
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       230, 50, 900, 500, nullptr, nullptr, hInstance, nullptr);
+
+   // ☆초기화는 프로그램이 실행될때 맨 처음 한번만.
+   // Initialize가 받는 인자는, 윈도우가 실행될때 생성되는 hWnd값. 
+   application.Initialize(hWnd); 
+
      //윈도우 창에서의 위지 / 콘솔창의 크기    
 
-  // 오리지널 코드: HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+  //  오리지널 코드: HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
   //   CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
      //szWindowClass, szTitle, : 솔루션의 이름, 콘솔창의 이름 
@@ -230,29 +251,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+
     case WM_PAINT: // ** 화면에 새로운것을 띄워야 할 필요가 있을 때, 사용되는 함수 
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps); // **hdc: 그림과 관련된 영역을 다루는 핸들. 
 
-            // ** 어몽어스같은거 그리기 **
-            // Rectangle(hdc, 200, 200, 100, 100); // 직사각형: 왼 위 우 아래 (내부 투명한거 아님) 
-
-            HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(255, 0, 0)); // 붉은색
-            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush); // 붉은색2
-
-
-            Ellipse(hdc, 300, 1300, 50, 50); // 동그라미: 왼 위 우 아래  // 왼쪽 귀 
-            Ellipse(hdc, 200,200,10,10); // 동그라미: 왼 위 우 아래  // 오른쪽 귀 
-       
-            SelectObject(hdc, oldBrush); 
-            DeleteObject(myBrush); 
-
-            Ellipse(hdc, 150, 150, 20, 20); // 붉은색 종료되었으니 하얀색 
-
+            // (TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...)
             // 원리: 업데이트 윈도우에서, hdc를 이용해서 부름. 
+            
+            // Rectangle(hdc, 200, 200, 100, 100); // 직사각형
+            // Ellipse(hdc, 100, 100 , 200, 200); // 동그라미 
 
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            // >> main이 아니라, console에서 그리도록 할 것임. 
+
             EndPaint(hWnd, &ps);
         }
         break;

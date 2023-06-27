@@ -10,14 +10,14 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{3ac1bcdc-26d8-432a-83a1-b76d17aa2bc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\High level interface">
-      <UniqueIdentifier>{82968461-4a16-48da-9d4b-2d1e0ab88793}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Common">
       <UniqueIdentifier>{b6cd9176-4e65-4992-9d70-d2f450856197}</UniqueIdentifier>
     </Filter>
     <Filter Include="Windows\Header">
       <UniqueIdentifier>{9c8d85d5-925e-4ce5-b427-7f4269179484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High level interface">
+      <UniqueIdentifier>{82968461-4a16-48da-9d4b-2d1e0ab88793}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

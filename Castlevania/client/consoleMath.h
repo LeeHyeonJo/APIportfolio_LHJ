@@ -18,21 +18,21 @@
 
 // == 아무튼 벡터는 점이다. 이차원 공간에서 찍어주는 점. (삼차원에서도 가능하지만 그건 나중에) 
 
-namespace console::math // **의미 다시 질문하기 
+namespace console::math
+	// 네임스페이스; 이름의 간략화. console::math 를 생략하겠다는 의미. 
+	// 벤다이어그램처럼 감싸고 있는 모양새. console>math 이 상태. 다시 math 안에 Vector2가 들어감. 
 {
-	struct Vector2 // 위의 개념을 구현하는 것. 
+	struct Vector2 // 백터(위치와 방향)를 구현한다. 
+		// console::math::Vector2 (벤다이어그램처럼 들어가있다고 생각하기) 
 	{
 		float x; // 그래프 읽을땐 배열과 동일한지 물어보기. 
 		float y;
 
-		Vector2() // 벡터에 쓰이는 x,y값을 초기화 
+		Vector2() // 생성자: 벡터에 쓰이는 x,y값을 초기화 
 			: x(0.0f)
-			, y(0.0f) // float 초기화   
+			, y(0.0f) // float 초기화 : 0.0f <- 이렇게 함.   
 		{
 		
 		}
 	};
-
-	//mplayer포스는 여기에서 선언 
-
 }

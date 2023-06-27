@@ -6,51 +6,80 @@
 // 또는 깃헙에서 직접 코드를 따와도 됨. (이때는 ""으로 선언) 
 // 헤더파일에는 선언을, 실제 실행은 cpp에서 구현함. 
 
-
-// **네임 스페이스 지정해주어야 하나??**
 namespace console 
 {
-	Application::Application()
+	Application::Application() // 생성자 
 		:mHwnd(NULL)
-		, mHdc(NULL) // 핸들에 처음 널값을 넣어둠 
+		, mHdc(NULL) // 핸들에 처음 널값을 넣어둠 (초기화) 
 	{
 	}
 
-	Application::~Application()
+	Application::~Application() //소멸자 
 	{
 	}
 
-	void Application::Initialize(HWND mHwnd1) // mHwnd1값이 들어가고 
-		// mHwnd 에 인자값 넣어주고 
-		// mHdc에 GetDC 함수로 인자 넣어주기 
-	{
+	// ** 여기 흘러가는 구조 파악하기. 
+	void Application::Initialize(HWND mHwnd1) // 인자로 mHwnd1값이 들어가고 
+		// mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
+	{// 이 변수들 console.h에서 선언했음. 
 		mHwnd = mHwnd1;
-
-		mHdc = GetDC(mHwnd);
+		mHdc = GetDC(mHwnd); // GetDC == mHdc 값을 구해주는 함수. 
 	}
 
 	void Application::Run()
 	{
-		int a = 0; // 메세지가 들어오는지 확인하기 위해 
 		Update();
 		Render(); // 이렇게 Run 한바퀴가 도는걸 프레임이라고 함 
 	}
 
-	void Application::Update() // 그림 그릴 경우: 상태를 증가시키고 
+	void Application::Update() // 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
 	{
-		// vmffpdlddj vhtm.x += 0.1f
+		// 그려지는 원의 상태를 여기에서 체크 
+		//mPlayerPos.x += 0.01f;
+		//mPlayerPos.y += 0.01f;
 
-		// 너무 빠르게 그려지므로 키 입력을 넣어주기로 함
-		// 윈도우에서 기본으로 제공하는 함수 
+		// ** 방향키 입력에 따라서 이동하게 만들어보자. 
+		// ** 윈도우에서 지원하는 방향키 인식 함수 
+		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		{
+			// 왼
+			mPlayerPos.x -= 0.01f; 
+		}
 
-		// 키보드 상하좌우 함수 여기에 넣어줌 **
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		{
+			// 오
+			mPlayerPos.x += 0.01f; 
+		}
+
+		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			// 위
+			mPlayerPos.y -= 0.01f;
+		}
+
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			// 아래
+			mPlayerPos.y += 0.01f; 
+		}
 	}
 
-	void Application::Render() // 증가한 상태를 그림 
+	void Application::Render() // 증가한 상태를 "그림" 
 	{
-		// 그림 그리는 함수를 역;로 가져욤 
-		// mHDC로 핸들이바뀜 
-		// 이클립스 함수가 여기로 들어옴 ** 
+		// 원을 그릴것: main.cpp - WM_PAINT에 있던 그림 함수가 여기로.
+		Ellipse(mHdc, 
+			 200 + mPlayerPos.x
+			,200 + mPlayerPos.y
+
+			,400 + mPlayerPos.x
+			,400 + mPlayerPos.y
+		); // 원을 main이 아니라 console에서 그릴 수 있게 됨. 
+
+		// **윈도우 좌표계**
+		// 좌측 최상단 0,0
+		// 아래로 내려가면 y축 ++ 
+		// 오른쪽으로 가면 x축 ++ 
 	}
 }
 
