@@ -40,29 +40,38 @@ namespace console
 
 		// ** 방향키 입력에 따라서 이동하게 만들어보자. 
 		// ** 윈도우에서 지원하는 방향키 인식 함수 
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
 			// 왼
 			mPlayerPos.x -= 0.01f; 
 		}
 
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
 			// 오
 			mPlayerPos.x += 0.01f; 
 		}
 
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		//if (GetAsyncKeyState(VK_UP) & 0x8000)
 		{
 			// 위
 			mPlayerPos.y -= 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 		{
 			// 아래
 			mPlayerPos.y += 0.01f; 
 		}
+	
+	
+	// 여기를 if문이 아니라...~ 
+		// 인풋 클래스를 이용해서 구현할 것임. 
+		Input::update();
+		{
+		// 입력된 키가 wasd 일떄 상하좌우로 움직이게끔 구현. 
+		}
+	
 	}
 
 	void Application::Render() // 증가한 상태를 "그림" 

@@ -19,6 +19,9 @@
     <Filter Include="Engine\High level interface">
       <UniqueIdentifier>{82968461-4a16-48da-9d4b-2d1e0ab88793}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{305f10a1-927d-4738-8407-b5a8456a608d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -42,6 +45,9 @@
     <ClInclude Include="consoleMath.h">
       <Filter>Engine\Common</Filter>
     </ClInclude>
+    <ClInclude Include="inputclass.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="client.ico">
@@ -61,5 +67,8 @@
       <Filter>Engine\High level interface</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="inputclass.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
