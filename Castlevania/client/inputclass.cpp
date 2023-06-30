@@ -32,7 +32,7 @@ namespace game
 			key.bpressed = false;  
 
 			mKeys.push_back(key); // push_back() =  vector의 제일 끝에 값을 추가. (벡터의 크기 1증가)  
-			//ㄴ mKeys에 모든 값을 넣어줌. (A~z까지 모든 키보드가 눌리지 않은 채로 초기화 됨.) 
+			//ㄴ mKeys에 모든 값을 넣어줌. (A~Z까지 모든 키보드가 눌리지 않은 채로 초기화 됨.) 
 		}
 
 	}
@@ -50,7 +50,7 @@ namespace game
 				// ㄴ 눌린거일때의 값만 리턴값으로 체크해서 사용한다는 것이다. 
 			{
 				// 1-1. 이전 프레임에서도 눌려있었다면 (mkey는 내가 입력한 키의 상태를 저장) 
-				if (mKeys[i].bpressed == true)
+				if (mKeys[i].bpressed == true) 
 				{
 					mKeys[i].state = eKeystate::Pressed; // 예전부터 꾹 눌린 상태 
 				}
@@ -60,7 +60,7 @@ namespace game
 				}
 
 				// pressed도 체크해주어야 함
-				mKeys[i].bpressed == true;  
+				mKeys[i].bpressed = true;  
 			}
 
 			// 2. 해당키가 현재 눌리지 않았다.
@@ -79,7 +79,7 @@ namespace game
 				}
 
 				// pressed도 체크해주어야 함
-				mKeys[i].bpressed == false;  
+				mKeys[i].bpressed = false;  
 			}
 			
 		}

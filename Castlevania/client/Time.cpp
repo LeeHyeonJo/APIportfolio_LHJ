@@ -54,16 +54,25 @@ namespace game
 
 	void Time::Render(HDC hdc) // c. 렌더 (델타 타임을 이용해 fps를 구하고 화면에 표시) 
 		// 배열에 값을 채워주고 띄운다. 
-	{
-		wchar_t szFloat[50] = {}; // 1.FPs 숫자를 담을 배열을 만든다 (fps숫자를 저장할거임) 
-		float fps = 1.0f / mDeltaTime;  // ★델타타임의 역수 = fps (역수 구하는 법: 1/델타타임) 
+	{ // 너무 빨라서 초단위로 띄워주기로 함. 
 
-		// ★2.swprintf_s 함수는 szFloat배열에 값을 넣어준다 
-		// (배열이름,크기, 넣을 값1, 넣을 값2) 우에서 좌로 읽는다 (fps가 "FPS : %f"로 들어감. 그것이  szfloat로) 
-		swprintf_s(szFloat, 50, L"FPS : %f", fps); // %f는 실수, %d는 정수 
-		int strlen = wcsnlen_s(szFloat, 50); // 3. szFloat 안에 있는 요소의 길이를 구한다. 
+		static float timeCheck = 0.0f; 
+		timeCheck += mDeltaTime;
 
-		// 3. 화면에 내부를 채운 szFloat를 띄운다. 
-		TextOut(hdc, 10, 10, szFloat, strlen); // 배열을 길이만큼 띄운다.  
+		if (timeCheck >= 1.0f)
+		{
+			wchar_t szFloat[50] = {}; // 1.FPs 숫자를 담을 배열을 만든다 (fps숫자를 저장할거임) 
+			float fps = 1.0f / mDeltaTime;  // ★델타타임의 역수 = fps (역수 구하는 법: 1/델타타임) 
+
+			// ★2.swprintf_s 함수는 szFloat배열에 값을 넣어준다 
+			// (배열이름,크기, 넣을 값1, 넣을 값2) 우에서 좌로 읽는다 (fps가 "FPS : %f"로 들어감. 그것이  szfloat로) 
+			swprintf_s(szFloat, 50, L"FPS : %f", fps); // %f는 실수, %d는 정수 
+			int strlen = wcsnlen_s(szFloat, 50); // 3. szFloat 안에 있는 요소의 길이를 구한다. 
+
+			// 3. 화면에 내부를 채운 szFloat를 띄운다. 
+			TextOut(hdc, 10, 10, szFloat, strlen); // 배열을 길이만큼 띄운다.  
+
+			timeCheck = 0.0f; 
+		}
 	}
 }
