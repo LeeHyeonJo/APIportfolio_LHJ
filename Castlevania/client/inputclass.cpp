@@ -26,11 +26,12 @@ namespace game
 
 		for (int i = 0; i < (int)eKeycode::End; i++)
 		{
-			Key key = {}; // ☆26개의 모든 키보드 배열을 만들고 초기화하는중.. 
+			Key key = {};
+			// ☆26개의 모든 키 - key를 for문 돌며 하나씩 만들고 초기화하는중.. (이걸 push_back으로 배열에 넣는 과정) 
 			key.code = (eKeycode)i; // 알파벳  
 			key.state = eKeystate::None;  
 			key.bpressed = false;  
-
+			
 			mKeys.push_back(key); // push_back() =  vector의 제일 끝에 값을 추가. (벡터의 크기 1증가)  
 			//ㄴ mKeys에 모든 값을 넣어줌. (A~Z까지 모든 키보드가 눌리지 않은 채로 초기화 됨.) 
 		}

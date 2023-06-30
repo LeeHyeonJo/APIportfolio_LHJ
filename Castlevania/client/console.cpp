@@ -20,15 +20,16 @@ namespace game
 	Application::~Application() //소멸자 
 	{
 	}
-
-	// ** 여기 흘러가는 구조 파악하기. 
-	void Application::Initialize(HWND mHwnd1) // 인자로 mHwnd1값이 들어가고 
-		// mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
-	{// 이 변수들 console.h에서 선언했음. 
+	// ☆모든 초기화를 담당 
+	// ** main에서 윈도우가 생성된 후 , 첫 초기화 // 인자로 윈도우 창 생성 후 반환된 핸들이 mHwnd1값으로 들어가고 
+	void Application::Initialize(HWND mHwnd1)   // mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
+	{	// 이 변수들 console.h에서 선언했음. 
 		mHwnd = mHwnd1;
 		mHdc = GetDC(mHwnd); // GetDC == mHdc 값을 구해주는 함수. 
+		// >> 생성된 윈도우의 핸들값 2개를 각각 넣어줌 
 
 		// ★ 인풋, 타입 초기화를 안해서 생긴 문제. 
+		// input & time 초기화 
 		Input::Initailize(); // 키 
 		Time::Initiailize();  // 시간 
 	}

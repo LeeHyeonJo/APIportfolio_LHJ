@@ -2,7 +2,7 @@
 // 그리고 프로그램(console)에 필요한 헤더들을 한 곳에 모아두었다.
 
 #pragma once // 겹치는 헤더가 여러개 있어도 하나만 가져와서 사용할 수 있게 해주는 역할 
-#include <vector> // 배열 라이브러리 
+#include <vector> // 배열 라이브러리 (동적 배열) 
 #include <list> // 링크드 리스트 라이브러리 
 #include <map> // 트리 구조 
 #include <set> // 해시 테이블 구조 
