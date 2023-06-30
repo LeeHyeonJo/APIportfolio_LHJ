@@ -27,11 +27,11 @@ namespace game
 		for (int i = 0; i < (int)eKeycode::End; i++)
 		{
 			Key key = {}; // ☆26개의 모든 키보드 배열을 만들고 초기화하는중.. 
-			key.code = (eKeycode)i; // 알파벳 
-			key.state = eKeystate::None; 
-			key.bpressed = false; 
+			key.code = (eKeycode)i; // 알파벳  
+			key.state = eKeystate::None;  
+			key.bpressed = false;  
 
-			mKeys.push_back(key); // push_back() =  vector의 제일 끝에 값을 추가. (벡터의 크기 1증가) 
+			mKeys.push_back(key); // push_back() =  vector의 제일 끝에 값을 추가. (벡터의 크기 1증가)  
 			//ㄴ mKeys에 모든 값을 넣어줌. (A~z까지 모든 키보드가 눌리지 않은 채로 초기화 됨.) 
 		}
 
@@ -60,7 +60,7 @@ namespace game
 				}
 
 				// pressed도 체크해주어야 함
-				mKeys[i].bpressed == true; 
+				mKeys[i].bpressed == true;  
 			}
 
 			// 2. 해당키가 현재 눌리지 않았다.
@@ -79,7 +79,7 @@ namespace game
 				}
 
 				// pressed도 체크해주어야 함
-				mKeys[i].bpressed == false; 
+				mKeys[i].bpressed == false;  
 			}
 			
 		}

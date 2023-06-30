@@ -26,7 +26,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 // WCHAR은 2바이트 크기의 자료형. 한글,한자 등을 표현할 수 있다 (지금은 이것이 표준) 
 // WCHAR 형은 초기화할때 앞에 L을 붙인다. 
 
-console::Application application;  
+game::Application application;  
 // console::Application 이 크기를 가진 메모리를 할당. 그 이름은 어플리케이션 
 // ㄴ 클래스의 객체를 전역변수로 선언한 것.
 

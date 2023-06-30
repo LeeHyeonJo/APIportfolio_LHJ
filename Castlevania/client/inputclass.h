@@ -63,10 +63,10 @@ namespace game
 		// ★이하 함수들은 입력한 키 값이 다운인지, 업인지, 프레스드인지를 트루 펄스로 체크 
 		// **static: 객체를 안 만들어도 사용가능하게 해줌. 즉, 전역 함수 취급임. 
 
-		// && 이 부분 질문하기 && 직접 돌아가는거 보기 // 
+		// && 이 부분 직접 돌아가는거 보기 // 
 		__forceinline static bool GetKeyDown(eKeycode code) // 입력한 키가, mkey 배열에 입력된 값과 동일한지 체크 
 		{
-			return mKeys[(int)code].state == eKeystate::Down;  
+			return mKeys[(int)code].state == eKeystate::Down;  // 우항과 입력된  코드의 state가 동일시 true 리컨
 		} 
 		__forceinline static bool GetKeyUp(eKeycode code)
 		{
