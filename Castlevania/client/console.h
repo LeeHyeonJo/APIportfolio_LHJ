@@ -3,7 +3,7 @@
 // 게임 엔진의 전반적인 작업을 하는 역할 
 /// 마찬가지로 헤더/함수를 여기에 모아두고, 본격적인 구현은 console.cpp에서 진행. 
 
-namespace console
+namespace game
 {
 	using namespace math;  
 	// 콘솔>수학>클래스:어플리케이션 ~ 이렇게 들어있는 것. 

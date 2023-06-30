@@ -6,7 +6,7 @@
 // 또는 깃헙에서 직접 코드를 따와도 됨. (이때는 ""으로 선언) 
 // 헤더파일에는 선언을, 실제 실행은 cpp에서 구현함. 
 
-namespace console 
+namespace game
 {
 	Application::Application() // 생성자 
 		:mHwnd(NULL)
@@ -41,35 +41,51 @@ namespace console
 		// ** 방향키 입력에 따라서 이동하게 만들어보자. 
 		// ** 윈도우에서 지원하는 방향키 인식 함수 
 		//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		{
+		//{
 			// 왼
-			mPlayerPos.x -= 0.01f; 
-		}
+			//mPlayerPos.x -= 0.01f; 
+		//}
 
 		//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		{
+		//{
 			// 오
-			mPlayerPos.x += 0.01f; 
-		}
+			//mPlayerPos.x += 0.01f; 
+		//}
 
 		//if (GetAsyncKeyState(VK_UP) & 0x8000)
-		{
+		//{
 			// 위
-			mPlayerPos.y -= 0.01f;
-		}
+			//mPlayerPos.y -= 0.01f;
+		//}
 
 		//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-		{
+		//{
 			// 아래
-			mPlayerPos.y += 0.01f; 
-		}
+			//mPlayerPos.y += 0.01f; 
+		//}
 	
 	
-	// 여기를 if문이 아니라...~ 
-		// 인풋 클래스를 이용해서 구현할 것임. 
-		Input::update();
+	//★여기를 if문이 아니라...~ 
+		// input 클래스를 이용해서 구현할 것임. WASD 입력에 따라서 움직이도록 구현한다. 
+
+		// 이거 왜 안돼냐~ 
+		Input::Update(); 
+
+		if (Input::GetKey(eKeycode::W))
 		{
-		// 입력된 키가 wasd 일떄 상하좌우로 움직이게끔 구현. 
+			mPlayerPos.y -= 0.01f;
+		}
+		if (Input::GetKey(eKeycode::A))
+		{
+			mPlayerPos.x -= 0.01f;
+		}
+		if (Input::GetKey(eKeycode::S))
+		{
+			mPlayerPos.y += 0.01f;
+		}
+		if (Input::GetKey(eKeycode::D))
+		{
+			mPlayerPos.x += 0.01f;
 		}
 	
 	}

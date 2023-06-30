@@ -18,7 +18,7 @@
 
 // == 아무튼 벡터는 점이다. 이차원 공간에서 찍어주는 점. (삼차원에서도 가능하지만 그건 나중에) 
 
-namespace console::math
+namespace game::math
 	// 네임스페이스; 이름의 간략화. console::math 를 생략하겠다는 의미. 
 	// 벤다이어그램처럼 감싸고 있는 모양새. console>math 이 상태. 다시 math 안에 Vector2가 들어감. 
 {
