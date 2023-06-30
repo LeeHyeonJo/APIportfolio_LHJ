@@ -22,6 +22,9 @@
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{305f10a1-927d-4738-8407-b5a8456a608d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{1770d623-b29c-4293-87a0-4eb7049e6877}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="inputclass.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="client.ico">
@@ -69,6 +75,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="inputclass.cpp">
       <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -34,46 +34,16 @@ namespace game
 
 	void Application::Update() // 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
 	{
-		// 그려지는 원의 상태를 여기에서 체크 
-		//mPlayerPos.x += 0.01f;
-		//mPlayerPos.y += 0.01f;
-
-		// ** 방향키 입력에 따라서 이동하게 만들어보자. 
-		// ** 윈도우에서 지원하는 방향키 인식 함수 
-		//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		//{
-			// 왼
-			//mPlayerPos.x -= 0.01f; 
-		//}
-
-		//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		//{
-			// 오
-			//mPlayerPos.x += 0.01f; 
-		//}
-
-		//if (GetAsyncKeyState(VK_UP) & 0x8000)
-		//{
-			// 위
-			//mPlayerPos.y -= 0.01f;
-		//}
-
-		//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-		//{
-			// 아래
-			//mPlayerPos.y += 0.01f; 
-		//}
-	
-	
 	//★여기를 if문이 아니라...~ 
 		// input 클래스를 이용해서 구현할 것임. WASD 입력에 따라서 움직이도록 구현한다. 
 
 		// 이거 왜 안돼냐~ 
+		// 여기서 타임 업데이트 
 		Input::Update(); 
 
 		if (Input::GetKey(eKeycode::W))
 		{
-			mPlayerPos.y -= 0.01f;
+			mPlayerPos.y -= 0.01f; // 델타타임으로 보정한 값을 넣어줌. 
 		}
 		if (Input::GetKey(eKeycode::A))
 		{
