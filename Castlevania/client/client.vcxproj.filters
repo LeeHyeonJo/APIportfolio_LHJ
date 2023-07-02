@@ -22,7 +22,7 @@
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{305f10a1-927d-4738-8407-b5a8456a608d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Time">
+    <Filter Include="Engine\Time">
       <UniqueIdentifier>{1770d623-b29c-4293-87a0-4eb7049e6877}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,7 +52,7 @@
       <Filter>Engine\Input</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>Time</Filter>
+      <Filter>Engine\Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +77,7 @@
       <Filter>Engine\Input</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>Time</Filter>
+      <Filter>Engine\Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
