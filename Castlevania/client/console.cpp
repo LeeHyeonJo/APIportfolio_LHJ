@@ -2,6 +2,11 @@
 #include "Inputclass.h" 
 #include "Time.h" 
 
+// rand, time 함수용 헤더 
+#include <iostream>
+#include <cstdlib> // rand, srand 
+#include <ctime> // time 
+
 // #imgui.h 설치 :: vcpck 다운 & 연결 
 // https://cheongpark.tistory.com/15 보고 따라하기 (이때는 <>로 선언) 
 // 페키지 > 인스톨드 > 64윈도우기>인클루드orlib에 imgui.h가 설치된걸 확인할 수 있음. 
@@ -30,7 +35,7 @@ namespace game
 
 		// ★ 인풋, 타입 초기화를 안해서 생긴 문제. 
 		// input & time 초기화 
-		Input::Initailize(); // 키 
+		//Input::Initailize(); // 키 
 		Time::Initiailize();  // 시간 
 	}
 
@@ -42,30 +47,63 @@ namespace game
 
 	void Application::Update() // 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
 	{
-	//★여기를 if문이 아니라...~ 
-		// input 클래스를 이용해서 구현할 것임. WASD 입력에 따라서 움직이도록 구현한다. 
-
 		Time::Update(); // ~여기서 타임 업데이트 
-		Input::Update(); // 키 업데이트 
+		//Input::Update(); // 키 업데이트 
+		
+		srand((unsigned int)time(NULL)); 
+		int randnum = rand() % 8 + 1; // 1~8까지
 
-		if (Input::GetKey(eKeycode::W))
+		// randnum의 숫자에 따라 프로그램 실행할때마다 방향 전환 
+
+		if (randnum == 1) // 위
 		{
-			mPlayerPos.y -= 300.0f * Time::Deltatime();
-			// 델타타임으로 보정한 값을 넣는다(곱)
-			// mDeltaTime은 private라 접근 불가능, public함수로 만들어서 접근. 
+			mPlayerPos.y -= 200.0f * Time::Deltatime();
 		}
-		if (Input::GetKey(eKeycode::A))
+
+		else if (randnum == 2) // 아래
 		{
-			mPlayerPos.x -= 300.0f * Time::Deltatime(); 
+			mPlayerPos.y += 200.0f * Time::Deltatime();
 		}
-		if (Input::GetKey(eKeycode::S))
+
+		else if (randnum == 3) // 왼
 		{
-			mPlayerPos.y += 300.0f * Time::Deltatime(); 
+			mPlayerPos.x -= 200.0f * Time::Deltatime();
 		}
-		if (Input::GetKey(eKeycode::D))
+
+		else if (randnum == 4) // 우
 		{
-			mPlayerPos.x += 300.0f * Time::Deltatime();  
+			mPlayerPos.x += 200.0f * Time::Deltatime(); 
 		}
+
+		else if (randnum == 5) // 우측 위 대각선
+		{
+			mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+			mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+		}
+
+		else if (randnum == 6) // 우측 아래 대각선
+		{
+			mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			mPlayerPos.x += 200.0f * Time::Deltatime();   // d 우
+		}
+
+		else if (randnum == 7) // 좌측 위 대각선 
+		{
+			mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+			mPlayerPos.x -= 200.0f * Time::Deltatime(); // a 왼 
+		}
+
+		else if (randnum == 8) // 좌측 아래 대각선 
+		{
+			mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			mPlayerPos.x -= 200.0f * Time::Deltatime(); // a 왼 
+		}
+
+		// 원이 움직이는 방향 
+		//mPlayerPos.y -= 300.0f * Time::Deltatime(); // w 위
+		//mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+		//mPlayerPos.y += 300.0f * Time::Deltatime(); // s 아래
+		//mPlayerPos.x += 300.0f * Time::Deltatime();  // d 우
 	
 	}
 
@@ -74,8 +112,8 @@ namespace game
 		Time::Render(mHdc); // ~여기서 타임 - 시간 띄워주기 
 		// 원을 그릴것: main.cpp - WM_PAINT에 있던 그림 함수가 여기로.
 		Ellipse(mHdc, 
-			 200 + mPlayerPos.x
-			,200 + mPlayerPos.y
+			 300 + mPlayerPos.x
+			,300 + mPlayerPos.y
 
 			,400 + mPlayerPos.x
 			,400 + mPlayerPos.y
