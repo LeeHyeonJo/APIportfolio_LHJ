@@ -27,11 +27,18 @@ namespace game
 	}
 	// ☆모든 초기화를 담당 
 	// ** main에서 윈도우가 생성된 후 , 첫 초기화 // 인자로 윈도우 창 생성 후 반환된 핸들이 mHwnd1값으로 들어가고 
-	void Application::Initialize(HWND mHwnd1)   // mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
+	void Application::Initialize(HWND mHwnd1, POINT resolution1)   // mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
 	{	// 이 변수들 console.h에서 선언했음. 
 		mHwnd = mHwnd1;
-		mHdc = GetDC(mHwnd); // GetDC == mHdc 값을 구해주는 함수. 
-		// >> 생성된 윈도우의 핸들값 2개를 각각 넣어줌 
+		mHdc = GetDC(mHwnd);
+		// GetDC == mHdc 값을 구해주는 함수. 
+		// >> 생성된 윈도우의 핸들값 2개를 각각 넣어줌. 
+
+		//			   메인에서 생성시 900,600
+		RECT rect = { 0, 0, resolution1.x, resolution1.y }; 
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, true); //&rect로 rect를 받음. (상태창 뺀 크기)
+		SetWindowPos(mHwnd, nullptr, 100, 100, rect.right - rect.left, rect.bottom - rect.top, 0);
+		// 상태창 뺀 크기가 900,600인걸로 화면 재생성. 908, -8, 608, -51
 
 		// ★ 인풋, 타입 초기화를 안해서 생긴 문제. 
 		// input & time 초기화 
@@ -58,46 +65,52 @@ namespace game
 
 		if (randnum == 1) // 위
 		{
-			mPlayerPos.y -= 200.0f * Time::Deltatime();
+			mPlayerPos.y -= 500.0f * Time::Deltatime();
 		}
 
 		else if (randnum == 2) // 아래
 		{
-			mPlayerPos.y += 200.0f * Time::Deltatime();
+			mPlayerPos.y += 500.0f * Time::Deltatime();
+
 		}
 
 		else if (randnum == 3) // 왼
 		{
-			mPlayerPos.x -= 200.0f * Time::Deltatime();
+			mPlayerPos.x -= 500.0f * Time::Deltatime();
+
 		}
 
 		else if (randnum == 4) // 우
 		{
-			mPlayerPos.x += 200.0f * Time::Deltatime(); 
+			mPlayerPos.x += 500.0f * Time::Deltatime(); 
+
 		}
 
 		else if (randnum == 5) // 우측 위 대각선
 		{
-			mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-			mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			mPlayerPos.y -= 500.0f * Time::Deltatime(); // w 위
+			mPlayerPos.x += 500.0f * Time::Deltatime();  // d 우
+
 		}
 
 		else if (randnum == 6) // 우측 아래 대각선
 		{
-			mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			mPlayerPos.x += 200.0f * Time::Deltatime();   // d 우
+			mPlayerPos.y += 500.0f * Time::Deltatime(); // s 아래
+			mPlayerPos.x += 500.0f * Time::Deltatime();   // d 우
+
 		}
 
 		else if (randnum == 7) // 좌측 위 대각선 
 		{
-			mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-			mPlayerPos.x -= 200.0f * Time::Deltatime(); // a 왼 
+			mPlayerPos.y -= 500.0f * Time::Deltatime(); // w 위
+			mPlayerPos.x -= 500.0f * Time::Deltatime(); // a 왼 
+
 		}
 
 		else if (randnum == 8) // 좌측 아래 대각선 
 		{
-			mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			mPlayerPos.x -= 200.0f * Time::Deltatime(); // a 왼 
+			mPlayerPos.y += 500.0f * Time::Deltatime(); // s 아래
+			mPlayerPos.x -= 500.0f * Time::Deltatime(); // a 왼 
 		}
 
 		// 원이 움직이는 방향 
@@ -105,145 +118,6 @@ namespace game
 		//mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
 		//mPlayerPos.y += 300.0f * Time::Deltatime(); // s 아래
 		//mPlayerPos.x += 300.0f * Time::Deltatime();  // d 우
-
-		// ** 화면 밖으로 나가지 않도록 체크 **
-
-		if (300 + mPlayerPos.x < 0) // 레프트 
-		{
-			srand((unsigned int)time(NULL)); 
-			int randnum1 = rand() % 5 + 1; // 1~5까지
-
-			if (randnum1 == 1)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-			}
-
-			else if (randnum1 == 2) 
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-			}
-
-			else if (randnum1 == 3)
-			{
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-			}
-
-			else if (randnum1 == 4)
-			{
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-
-			else if (randnum1 == 5)
-			{
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-		}
-
-		else if (300 + mPlayerPos.y < 0) // 탑
-		{
-			srand((unsigned int)time(NULL));
-			int randnum1 = rand() % 5 + 1; // 1~5까지
-
-
-			if (randnum1 == 1) 
-			{
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-			}
-
-			else if (randnum1 == 2)
-			{
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-			}
-
-			else if (randnum1 == 3)
-			{
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-
-			else if (randnum1 == 4)
-			{
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-
-			else if (randnum1 == 5)
-			{
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-
-		}
-
-		else if (400 + mPlayerPos.x > 900) // 라이트
-		{
-			srand((unsigned int)time(NULL));
-			int randnum1 = rand() % 5 + 1; // 1~5까지
-
-
-			if (randnum1 == 1)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-			}
-
-			else if (randnum1 == 2)
-			{
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-
-			else if (randnum1 == 3)
-			{
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-			}
-
-			else if (randnum1 == 4)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-			}
-
-			else if (randnum1 == 5)
-			{
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
-			}
-		}
-
-		else if (400 + mPlayerPos.y > 500) // 바텀
-		{
-			srand((unsigned int)time(NULL));
-			int randnum1 = rand() % 5 + 1; // 1~5까지
-
-
-			if (randnum1 == 1)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-			}
-
-			else if (randnum1 == 2)
-			{
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-			}
-
-			else if (randnum1 == 3)
-			{
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-			}
-
-			else if (randnum1 == 4)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-			}
-
-			else if (randnum1 == 5)
-			{
-				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
-				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
-			}
-		}
-		
 	}
 
 	void Application::Render() // 증가한 상태를 "그림"  & 화면에 띄워주는 함수 
@@ -267,7 +141,7 @@ namespace game
 			circletime = 0.0f; 
 		}
 
-	  Ellipse(mHdc, 300 + mPlayerPos.x, 300 + mPlayerPos.y, 400 + mPlayerPos.x, 400 + mPlayerPos.y); // 처음 원. 
+	  Ellipse(mHdc, 0 + mPlayerPos.x, 0 + mPlayerPos.y, 100 + mPlayerPos.x, 100 + mPlayerPos.y); // 처음 원. 
 
 
 

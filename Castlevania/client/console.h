@@ -13,7 +13,7 @@ namespace game
 		Application(); // 생성자 
 		~Application(); // 소멸자 
 
-		void Initialize(HWND mHwnd); // 초기화
+		void Initialize(HWND mHwnd, POINT resolution); // 초기화
 		void Run(); // 프로그램 실행
 		void Update(); // 업데이트 
 		void Render(); // 리소스(그림) 띄워줌 
@@ -35,7 +35,11 @@ namespace game
 		// consolemath.h 가 존재함. 그러므로 commonincluse.h를 넣어준 것. 
 
 		static float circletime; // 공 만드는 변수 
-
-	};
+		struct resolution // 윈도우의 새로운 크기 
+		{
+			float x;
+			float y;
+		};
+	}; 
 }
 

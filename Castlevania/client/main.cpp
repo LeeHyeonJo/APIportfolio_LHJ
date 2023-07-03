@@ -183,12 +183,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    // ★윈도우 창을 만드는 함수: 윈도우 클래스, 이름...
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      230, 50, 900, 500, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, 
+            CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    // ☆초기화는 프로그램이 실행될때 맨 처음 한번만.
    // Initialize가 받는 인자는, 윈도우가 실행될때 생성되는 hWnd값. 
-   application.Initialize(hWnd); 
+   application.Initialize(hWnd, {900,600});
 
      //윈도우 창에서의 위지 / 콘솔창의 크기    
 
@@ -197,7 +197,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
      //szWindowClass, szTitle, : 솔루션의 이름, 콘솔창의 이름 
     // 첫 CW_USEDEFAULT, 0 : 윈도우의 좌표 = 좌측 상단이 0이다 (배열과 동일) !!이건 운영체제마다 다름. 
-    //  ㄴ 게임 창이 윈도우의 어디에서 뜰지, 라는 뜻. 
+    //  ㄴ 게임 창이 윈도우의 어디에서 뜰지, 라는 뜻.  
     // 두 CW_USEDEFAULT, 0,: 실제 게임 화면의 크기 
    // ex. CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,  :: 0,0,1600,900 : 0,0위치에 1600*900의 크기의 창을 만들어줘. 
 
