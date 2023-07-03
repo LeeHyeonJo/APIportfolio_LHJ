@@ -33,6 +33,9 @@ namespace game
 		// consolemath 에서 vecter2 클래스로 선언함. 그것의 객체를 사용. 
 		// 사용가능한 이유: consolemath.h가 필요. 근데 모든 헤더를 모아둔 commoninclude.h에도
 		// consolemath.h 가 존재함. 그러므로 commonincluse.h를 넣어준 것. 
+
+		static float circletime; // 공 만드는 변수 
+
 	};
 }
 

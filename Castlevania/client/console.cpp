@@ -45,7 +45,8 @@ namespace game
 		Render(); // 이렇게 Run 한바퀴가 도는걸 프레임이라고 함 
 	}
 
-	void Application::Update() // 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
+	// 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
+	void Application::Update()
 	{
 		Time::Update(); // ~여기서 타임 업데이트 
 		//Input::Update(); // 키 업데이트 
@@ -104,20 +105,174 @@ namespace game
 		//mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
 		//mPlayerPos.y += 300.0f * Time::Deltatime(); // s 아래
 		//mPlayerPos.x += 300.0f * Time::Deltatime();  // d 우
-	
+
+		// ** 화면 밖으로 나가지 않도록 체크 **
+
+		if (300 + mPlayerPos.x < 0) // 레프트 
+		{
+			srand((unsigned int)time(NULL)); 
+			int randnum1 = rand() % 5 + 1; // 1~5까지
+
+			if (randnum1 == 1)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+			}
+
+			else if (randnum1 == 2) 
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			}
+
+			else if (randnum1 == 3)
+			{
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			}
+
+			else if (randnum1 == 4)
+			{
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+
+			else if (randnum1 == 5)
+			{
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+		}
+
+		else if (300 + mPlayerPos.y < 0) // 탑
+		{
+			srand((unsigned int)time(NULL));
+			int randnum1 = rand() % 5 + 1; // 1~5까지
+
+
+			if (randnum1 == 1) 
+			{
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+			}
+
+			else if (randnum1 == 2)
+			{
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			}
+
+			else if (randnum1 == 3)
+			{
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+
+			else if (randnum1 == 4)
+			{
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+
+			else if (randnum1 == 5)
+			{
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+
+		}
+
+		else if (400 + mPlayerPos.x > 900) // 라이트
+		{
+			srand((unsigned int)time(NULL));
+			int randnum1 = rand() % 5 + 1; // 1~5까지
+
+
+			if (randnum1 == 1)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+			}
+
+			else if (randnum1 == 2)
+			{
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+
+			else if (randnum1 == 3)
+			{
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+			}
+
+			else if (randnum1 == 4)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+			}
+
+			else if (randnum1 == 5)
+			{
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+				mPlayerPos.y += 200.0f * Time::Deltatime(); // s 아래
+			}
+		}
+
+		else if (400 + mPlayerPos.y > 500) // 바텀
+		{
+			srand((unsigned int)time(NULL));
+			int randnum1 = rand() % 5 + 1; // 1~5까지
+
+
+			if (randnum1 == 1)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+			}
+
+			else if (randnum1 == 2)
+			{
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+			}
+
+			else if (randnum1 == 3)
+			{
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			}
+
+			else if (randnum1 == 4)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+				mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
+			}
+
+			else if (randnum1 == 5)
+			{
+				mPlayerPos.y -= 200.0f * Time::Deltatime(); // w 위
+				mPlayerPos.x += 200.0f * Time::Deltatime();  // d 우
+			}
+		}
+		
 	}
 
 	void Application::Render() // 증가한 상태를 "그림"  & 화면에 띄워주는 함수 
 	{
-		Time::Render(mHdc); // ~여기서 타임 - 시간 띄워주기 
-		// 원을 그릴것: main.cpp - WM_PAINT에 있던 그림 함수가 여기로.
-		Ellipse(mHdc, 
-			 300 + mPlayerPos.x
-			,300 + mPlayerPos.y
+		Time::Render(mHdc); // ~여기서 fps 띄워주기   
 
-			,400 + mPlayerPos.x
-			,400 + mPlayerPos.y
-		); // 원을 main이 아니라 console에서 그릴 수 있게 됨. 
+		static float circletime = 0.0f;
+		circletime += Time::Deltatime(); // 시간 체크 
+
+		srand((unsigned int)time(NULL));
+		int randnum2 = rand() % 5 + 1; // 1~5까지
+
+		int x1 = randnum2 * 100; 
+		int y1 = randnum2 * 100 + 100; 
+
+
+		if (circletime >= 1.0f) // 원 추가 
+		{
+			Ellipse(mHdc, x1 + mPlayerPos.x, x1 + mPlayerPos.y, y1 + mPlayerPos.x, y1 + mPlayerPos.y); 
+
+			circletime = 0.0f; 
+		}
+
+	  Ellipse(mHdc, 300 + mPlayerPos.x, 300 + mPlayerPos.y, 400 + mPlayerPos.x, 400 + mPlayerPos.y); // 처음 원. 
+
+
+
+		// 원을 그릴것: main.cpp - WM_PAINT에 있던 그림 함수가 여기로.
+		// 원을 main이 아니라 console에서 그릴 수 있게 됨.
 
 		// **윈도우 좌표계**
 		// 좌측 최상단 0,0
