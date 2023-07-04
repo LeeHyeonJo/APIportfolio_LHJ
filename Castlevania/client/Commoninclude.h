@@ -14,4 +14,7 @@
 // 수학 관련 기능 (- 벡터만 구현된 상태 - ) : 원의 위치를 받아주는 것 
 // 선언은 여기서 하고, 구현은 consoleMath.h에서 해두는 것. 
 #include "consoleMath.h" 
+
+#include "Time.h"
+
  

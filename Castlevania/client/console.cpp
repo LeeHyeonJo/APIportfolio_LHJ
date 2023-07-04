@@ -1,11 +1,7 @@
 #include "console.h"
 #include "Inputclass.h" 
 #include "Time.h" 
-
-// rand, time 함수용 헤더 
-#include <iostream>
-#include <cstdlib> // rand, srand 
-#include <ctime> // time 
+#include "newcircle.h"   
 
 // #imgui.h 설치 :: vcpck 다운 & 연결 
 // https://cheongpark.tistory.com/15 보고 따라하기 (이때는 <>로 선언) 
@@ -58,60 +54,7 @@ namespace game
 		Time::Update(); // ~여기서 타임 업데이트 
 		//Input::Update(); // 키 업데이트 
 		
-		srand((unsigned int)time(NULL)); 
-		int randnum = rand() % 8 + 1; // 1~8까지
-
-		// randnum의 숫자에 따라 프로그램 실행할때마다 방향 전환 
-
-		if (randnum == 1) // 위
-		{
-			mPlayerPos.y -= 500.0f * Time::Deltatime();
-		}
-
-		else if (randnum == 2) // 아래
-		{
-			mPlayerPos.y += 500.0f * Time::Deltatime();
-
-		}
-
-		else if (randnum == 3) // 왼
-		{
-			mPlayerPos.x -= 500.0f * Time::Deltatime();
-
-		}
-
-		else if (randnum == 4) // 우
-		{
-			mPlayerPos.x += 500.0f * Time::Deltatime(); 
-
-		}
-
-		else if (randnum == 5) // 우측 위 대각선
-		{
-			mPlayerPos.y -= 500.0f * Time::Deltatime(); // w 위
-			mPlayerPos.x += 500.0f * Time::Deltatime();  // d 우
-
-		}
-
-		else if (randnum == 6) // 우측 아래 대각선
-		{
-			mPlayerPos.y += 500.0f * Time::Deltatime(); // s 아래
-			mPlayerPos.x += 500.0f * Time::Deltatime();   // d 우
-
-		}
-
-		else if (randnum == 7) // 좌측 위 대각선 
-		{
-			mPlayerPos.y -= 500.0f * Time::Deltatime(); // w 위
-			mPlayerPos.x -= 500.0f * Time::Deltatime(); // a 왼 
-
-		}
-
-		else if (randnum == 8) // 좌측 아래 대각선 
-		{
-			mPlayerPos.y += 500.0f * Time::Deltatime(); // s 아래
-			mPlayerPos.x -= 500.0f * Time::Deltatime(); // a 왼 
-		}
+		newcircle1::direct(); // 방향 됐다. 
 
 		// 원이 움직이는 방향 
 		//mPlayerPos.y -= 300.0f * Time::Deltatime(); // w 위
@@ -124,24 +67,12 @@ namespace game
 	{
 		Time::Render(mHdc); // ~여기서 fps 띄워주기   
 
-		static float circletime = 0.0f;
-		circletime += Time::Deltatime(); // 시간 체크 
 
-		srand((unsigned int)time(NULL));
-		int randnum2 = rand() % 5 + 1; // 1~5까지
-
-		int x1 = randnum2 * 100; 
-		int y1 = randnum2 * 100 + 100; 
-
-
-		if (circletime >= 1.0f) // 원 추가 
-		{
-			Ellipse(mHdc, x1 + mPlayerPos.x, x1 + mPlayerPos.y, y1 + mPlayerPos.x, y1 + mPlayerPos.y); 
-
-			circletime = 0.0f; 
-		}
-
-	  Ellipse(mHdc, 0 + mPlayerPos.x, 0 + mPlayerPos.y, 100 + mPlayerPos.x, 100 + mPlayerPos.y); // 처음 원. 
+		Ellipse(mHdc,
+			0 + player::Player.x, 
+			0 + player::Player.y, 
+			100 + player::Player.x, 
+			100 + player::Player.y); // 처음 원.  
 
 
 

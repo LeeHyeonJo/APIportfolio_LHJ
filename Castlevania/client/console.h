@@ -23,13 +23,14 @@ namespace game
 		// **내가 잡은 함수들이 cpp 파일로 구현됨. (껍데기가) 
 		// ㄴ 그 후 cpp에서 namespace로 간략하게 정리해준 것. 
 
-	private:
+	private: 
 		// 변수는 private에 저장. 
 		// **핸들을 저장할거임
 		HWND mHwnd; // 자료형 이 자체가 포인터 클래스 (typedef void* ptr 선언 후 ptr 자료형 쓰면 됨) 
 		HDC mHdc; // 즉, H지가 들어가면 전부 포인터 변수라고 생각하면 됨. 
 
-		Vector2 mPlayerPos; // 플레이어의 위치(y,x)를 받아줌. 
+		Vector2 player;
+		// 플레이어의 위치(y,x)를 받아줌. 
 		// consolemath 에서 vecter2 클래스로 선언함. 그것의 객체를 사용. 
 		// 사용가능한 이유: consolemath.h가 필요. 근데 모든 헤더를 모아둔 commoninclude.h에도
 		// consolemath.h 가 존재함. 그러므로 commonincluse.h를 넣어준 것. 

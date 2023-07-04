@@ -25,6 +25,9 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{1770d623-b29c-4293-87a0-4eb7049e6877}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Circle">
+      <UniqueIdentifier>{25dfb4b8-98de-476d-b041-88db2936b83e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -54,6 +57,9 @@
     <ClInclude Include="Time.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
+    <ClInclude Include="newcircle.h">
+      <Filter>Engine\Circle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="client.ico">
@@ -78,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="newcircle.cpp">
+      <Filter>Engine\Circle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
