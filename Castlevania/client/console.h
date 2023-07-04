@@ -13,7 +13,7 @@ namespace game
 		Application(); // 생성자 
 		~Application(); // 소멸자 
 
-		void Initialize(HWND mHwnd, POINT resolution); // 초기화
+		void Initialize(HWND mHwnd); // 초기화
 		void Run(); // 프로그램 실행
 		void Update(); // 업데이트 
 		void Render(); // 리소스(그림) 띄워줌 
@@ -35,12 +35,19 @@ namespace game
 		// 사용가능한 이유: consolemath.h가 필요. 근데 모든 헤더를 모아둔 commoninclude.h에도
 		// consolemath.h 가 존재함. 그러므로 commonincluse.h를 넣어준 것. 
 
+		// ** 여기에 직사각형 크기 저장할 변수. (네모 하나, 화면 크기만큼 그릴거임) 
+		// (** ㄱ콘솔 생성자에서 0으로 생성, 초기화에서 크기 지정. 
+
 		static float circletime; // 공 만드는 변수 
-		struct resolution // 윈도우의 새로운 크기 
-		{
-			float x;
-			float y;
-		};
+
+		// 유니트 헤이트
+		// 유니트 와이드 
+
+		// ** 더블 버퍼링 
+		// 화면 띄울거임 (비트맵) HBITMAP : mBackBuffer;  (새로운 화면, 도화지) 
+		// ㄴ 24바이트 짜리 RGB만 들어있음. 
+
+		// ㄴ 그릴것잉므로 hdc가 하나 더 필요함. 
 	}; 
 }
 

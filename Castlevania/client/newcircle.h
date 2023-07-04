@@ -33,6 +33,7 @@ namespace game
 		Vector2 Player;
 		bool is_start;
 		direct1 saveDirect; 
+		int flag; // 00000... ㄱ시간이 지나면 1이 되고, 하나씩 띄워보기. 
 		// direct1 을 어~ 받아주는 변수. 자료형은 enum class의 이름으로.
 	};
 

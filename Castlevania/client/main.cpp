@@ -178,7 +178,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
 //        주 프로그램 창을 만든 다음 표시합니다.
 //
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+BOOL InitInstance(HINSTANCE hInstance)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
@@ -188,7 +188,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // ☆초기화는 프로그램이 실행될때 맨 처음 한번만.
    // Initialize가 받는 인자는, 윈도우가 실행될때 생성되는 hWnd값. 
-   application.Initialize(hWnd, {900,600});
+   application.Initialize(hWnd);
 
      //윈도우 창에서의 위지 / 콘솔창의 크기    
 
