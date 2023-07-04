@@ -14,6 +14,19 @@
 
 namespace game
 {
+	enum class direct1 // 방향을 숫자로 저장 
+	{
+		up, // 0
+		down,
+		left,
+		right,
+
+		up_right,
+		down_right,
+		up_left,
+		down_left //7
+	};
+
 	class player
 	{
 	public:
@@ -29,19 +42,6 @@ namespace game
 
 		static void direct(); // 방향 
 		static void crash(); // 충돌
-	};
-
-	enum class direct1 // 방향을 숫자로 저장 
-	{
-		up, // 0
-		down, 
-		left,
-		right, 
-
-		up_right,
-		down_right,
-		up_left,
-		down_left //7
 	};
 }                         
 

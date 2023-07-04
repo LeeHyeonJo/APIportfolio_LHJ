@@ -12,6 +12,8 @@
 
 namespace game
 {
+	extern player test; // 서클 cpp에서 전역선언한 변수를 부러올때 .extern, 
+
 	Application::Application() // 생성자 
 		:mHwnd(NULL)
 		, mHdc(NULL) // 핸들에 처음 널값을 넣어둠 (초기화) 
@@ -69,10 +71,10 @@ namespace game
 
 
 		Ellipse(mHdc,
-			0 + player::Player.x, 
-			0 + player::Player.y, 
-			100 + player::Player.x, 
-			100 + player::Player.y); // 처음 원.  
+			0 + test.Player.x, 
+			0 + test.Player.y, 
+			100 + test.Player.x, 
+			100 + test.Player.y); // 처음 원.  
 
 
 

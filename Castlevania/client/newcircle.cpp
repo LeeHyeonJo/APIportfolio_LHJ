@@ -3,7 +3,7 @@
 
 namespace game
 {
-	player test; 
+	player test; // 클래스 player 의 메모리 할당. 
 
 	void newcircle1::direct()
 	{
