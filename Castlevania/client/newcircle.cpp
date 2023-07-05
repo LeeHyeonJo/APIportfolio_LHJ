@@ -4,9 +4,9 @@
 namespace game
 {
 	// **클래스 player 의 메모리 할당. 
-	// ㄴ 배열로 여길 만들면 원이 여러개. 
+	// ↓ 배열로 여길 만들면 원이 여러개. 
 
-	player test;
+	player test; // 클래스는 반드시 메모리를 할당해서 사용해야 한다. 
 
 	void newcircle1::direct()
 	{
@@ -21,57 +21,57 @@ namespace game
 		// randnum의 숫자에 따라 프로그램 실행할때마다 방향 전환 
 		if (test.saveDirect == direct1::up) // 위 
 		{
-			test.Player.x -= 250.0f * Time::Deltatime();
+			test.Player.x -= 100.0f * Time::Deltatime();
 		}
 
 		else if (test.saveDirect == direct1::down) // 아래
 		{
-			test.Player.y+= 250.0f * Time::Deltatime();
+			test.Player.y+= 100.0f * Time::Deltatime();
 		}
 
 		else if (test.saveDirect == direct1::left) // 왼
 		{
-			test.Player.x -= 250.0f * Time::Deltatime();
+			test.Player.x -= 100.0f * Time::Deltatime();
 
 		}
 
 		else if (test.saveDirect == direct1::right) // 우
 		{
-			test.Player.x += 250.0f * Time::Deltatime();
+			test.Player.x += 100.0f * Time::Deltatime();
 
 		}
 
 		else if (test.saveDirect == direct1::up_right) // 우측 위 대각선
 		{
-			test.Player.y -= 250.0f * Time::Deltatime(); // w 위
-			test.Player.x += 250.0f * Time::Deltatime();  // d 우 
+			test.Player.y -= 100.0f * Time::Deltatime(); // w 위
+			test.Player.x += 100.0f * Time::Deltatime();  // d 우 
 
 		}
 
 		else if (test.saveDirect == direct1::down_right) // 우측 아래 대각선
 		{
-			test.Player.y += 250.0f * Time::Deltatime(); // s 아래
-			test.Player.x += 250.0f * Time::Deltatime();   // d 우
+			test.Player.y += 100.0f * Time::Deltatime(); // s 아래
+			test.Player.x += 100.0f * Time::Deltatime();   // d 우
 			 
 		}
 
 		else if (test.saveDirect == direct1::up_left) // 좌측 위 대각선 
 		{
-			test.Player.y -= 250.0f * Time::Deltatime(); // w 위
-			test.Player.x -= 250.0f * Time::Deltatime(); // a 왼 
+			test.Player.y -= 100.0f * Time::Deltatime(); // w 위
+			test.Player.x -= 100.0f * Time::Deltatime(); // a 왼 
 
 		}
 
 		else if (test.saveDirect == direct1::up_left) // 좌측 아래 대각선 
 		{
-			test.Player.y += 250.0f * Time::Deltatime(); // s 아래
-			test.Player.x -= 250.0f * Time::Deltatime(); // a 왼 
+			test.Player.y += 100.0f * Time::Deltatime(); // s 아래
+			test.Player.x -= 100.0f * Time::Deltatime(); // a 왼 
 		}
 	}
 
-	void newcircle1::crash() // 충돌
+	void newcircle1::crash() // 충돌: 이건 나중에. 
 	{
-		// 900x600
+		// 화면 크기: 900x600
 
 		if (test.Player.x < 0 || test.Player.x>900 || test.Player.y<0 || test.Player.y>600)
 		{  

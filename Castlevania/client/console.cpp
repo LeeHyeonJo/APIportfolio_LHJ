@@ -16,13 +16,18 @@ namespace game
 
 	Application::Application() // 생성자 
 		:mHwnd(NULL)
-		, mHdc(NULL) // 핸들에 처음 널값을 넣어둠 (초기화) 
+		,mHdc(NULL) // 핸들에 처음 널값을 넣어둠 (초기화) 
+		,mWidth(0) // 잔상을 덮을 직사각형의 가로, 세로 크기 
+		,mHeight(0) // .. 를 0 으로 생성
+		,mBackBuffer(NULL) // 두번째 도화지용 변수들 생성 
+		,mBackHdc(NULL) // f12로 들어가보면 포인터 타입임을 알 수 있다. 
 	{
 	}
 
 	Application::~Application() //소멸자 
 	{
 	}
+
 	// ☆모든 초기화를 담당 
 	// ** main에서 윈도우가 생성된 후 , 첫 초기화 // 인자로 윈도우 창 생성 후 반환된 핸들이 mHwnd1값으로 들어가고 
 	void Application::Initialize(HWND mHwnd1)   // mHwnd 에 인자값 넣어주고 & mHdc에 GetDC 함수로 인자 넣어주기 
@@ -36,23 +41,45 @@ namespace game
 		// input & time 초기화 
 		//Input::Initailize(); // 키 
 
-		// 와이드 = 1800
-		// 헤이트 = 900
+		// 잔상 덮어주는 직사각형용 변수들을 여기서 초기화! (생성 후)
+		mWidth = 1600; 
+		mHeight = 900; 
 
-		// **상태창 빼고 띄우기 위한 함수. 
-		// 리엑트 
-		// 어드저스트윈도우리엑트(함수)
-		// 셋 윈도우포스(함수)
-		// 쇼윈도우(함수)
+		// **클라이언트 영역을 내가 원하는 크기로 조정 후 화면 띄우는 과정**
+		RECT rect = { 0,0, mWidth, mHeight }; 
 
-		// 도화지 (엠버퍼) = 윈도우 API 기본 함수( 화면 만들어주는 것: 필요인자가 기본윈도우의 인자들 ); 
-		// 도화지를 위한 mBackHdc = 윈도우 API 기본 함수(mHDC) 넣고 뱉게 함. 
-		//ㄴ * 기존 HDC 쓸 수 있는 거 아닌가? :: 그냥 .. 권장사항이 그럴 뿐 
+		//RECT는 인자로 left, top, right, bottom을 저장하는 구조체. 
+		// ㄴ 클라이언트 화면(만들고자 하는 크기 값을 여기에 저장) 
+		//클라이언트 영역: 순수한 게임 화면
+		//비클라이언트 영역: 상태창, 바 등... 
 
-		// >> 새 비트맵에 새 HDC를 연결해주어야 한다. 
-		// 연결해주는 함수 (새 HDC, 새 도화지); 
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+		// rect의 크기를 받아서, "비클라이언트"영역까지 포함한 윈도우 크기를 계산. 
+		
+		SetWindowPos(mHwnd
+			, nullptr, 0, 0
+			, rect.right - rect.left
+			, rect.bottom - rect.top
+			, 0);
+		// 계산한 윈도우 크기만큼을 재 세팅 (아직 화면 안 만들어짐) 
 
-		// 딜리트는 뭐지? 
+		ShowWindow(mHwnd, true);
+		// 쇼윈도우(함수): 위 과정을 거친 윈도우창을 드디어 화면에 띄워준다. 
+
+		// a. 도화지 (엠버퍼)
+		// = 윈도우 API 기본 함수(화면 만들어주는 것: 필요인자가 기본윈도우의 인자들)
+		mBackBuffer = CreateCompatibleBitmap(mHdc, mWidth, mHeight);
+
+		// b.도화지(엠버퍼)를 위한 mBackHdc 생성 = 윈도우 API 기본 함수(mHdc) 넣고 뱉게 함. 
+		mBackHdc = CreateCompatibleDC(mHdc);
+
+		// c. 새 비트맵에 새 HDC를 연결해주어야 한다. 
+		HBITMAP defaultBitmap  // 반환하는 건 도화지 엠버퍼의 디폴트 DC
+		= (HBITMAP)SelectObject(mBackHdc, mBackBuffer);
+				// 연결해주는 함수 (새 HDC, 새 도화지); 
+
+		// d. 반환된 디폴트 DC를 메모리에서 해제~
+		DeleteObject(defaultBitmap); 
 
 		Time::Initiailize();  // 시간 
 	}
@@ -66,51 +93,45 @@ namespace game
 	// 그림 그릴 경우: 상태를 증가(ex. 이동)하는 역할
 	void Application::Update()
 	{
-		Time::Update(); // ~여기서 타임 업데이트 
-		//Input::Update(); // 키 업데이트 
+		Time::Update(); // 타임 업데이트 
+		//Input::Update(); // 키 입력 업데이트 
 		
-		newcircle1::direct(); // 방향 됐다. 
-
-		// 원이 움직이는 방향 
-		//mPlayerPos.y -= 300.0f * Time::Deltatime(); // w 위
-		//mPlayerPos.x -= 300.0f * Time::Deltatime(); // a 왼
-		//mPlayerPos.y += 300.0f * Time::Deltatime(); // s 아래
-		//mPlayerPos.x += 300.0f * Time::Deltatime();  // d 우
+		newcircle1::direct(); // 원이 움직일 방향. 
 	}
 
-	void Application::Render() // 증가한 상태를 "그림"  & 화면에 띄워주는 함수 
+	void Application::Render() // 증가한 상태를 "그림" & 화면에 띄워주는 함수 
 	{
-		Time::Render(mHdc); // ~여기서 fps 띄워주기   
+		Time::Render(mBackHdc); // fps 띄워줌.    ** 이건 왜 안 뜨는 걸까?? ** 
 
 		// ** 잔상 지우기 ** // 
 		// = 흰 이미지를 덮어씌운다. 동그라미 크기만큼의 직사각형을 그려서 덮어씌운다. 
-
-		Rectangle(mHdx, -1, -1, mWidth + 1, mHeight + 1); 
-		// 변수는 따로 이 헤더에서 저장할거고, -1, +1은 화면 크기보다 더 크게 그려지라고 
-		// 일부러 숫자 줄이고 늘려준 것 
-
+		Rectangle(mBackHdc, -1, -1, mWidth+1, mHeight+1);
+		// 변수는 따로 이 헤더에서 저장할거고, -1, +1은 화면 크기보다 더 크게 그려지라고 일부러 숫자 줄이고 늘려준 것 
 		// 문제: 원 그리고, 직사각형 덧그려지고 반복되기 때문에 깜빡임이 생긴다. 
 
 
 		// 해결방식: 알고리즘 = 더블 버퍼링 (교대로 화면이 계속 스왑된다는 뜻) 
-		// >> api에선 이 알고리즘을 제공하지 ㅇ낳으므로, 비슷하게나마 구현해야 한다. 
+		// >> api에선 이 알고리즘을 제공하지 않으므로, 비슷하게나마 구현해야 한다. 
 		// 백 버퍼에 그림을 그리고, 원본에 복사. (눈은 원래도화지에 고정) 
 		// ㄴ 이 과정을 반복. ( = 깜빡임 제거 용) 
 		// 원리: 화면을 2개 사용 (만화경 프레임처럼 돌리겠다는 뜻) 
 
 
-		Ellipse(mHdc,
-			0 + test.Player.x, 
-			0 + test.Player.y, 
-			100 + test.Player.x, 
-			100 + test.Player.y); // 처음 원.  
+		Ellipse(mBackHdc,
+		300 + test.Player.x, 
+			300 + test.Player.y, 
+			400 + test.Player.x, 
+			400 + test.Player.y); // 처음 원.  
 
-
-		// 업데이트에서 백 버퍼를 만들고, HDC를 연결해준 다음
+		// ** 렌더에서는 도화지를 복사할 것 ** 
+		// 초기화(이니셜라이즈)에서 백 버퍼를 만들고, HDC를 연결해준 다음
 		// 여기에서는 원래 도화지에, 뉴 도화지를 복사해주는 역할을 한다. 
-		// ** 비트비트(mHDC, 앞에가 원래 도화지 // 뒤에가 백버퍼 도화지 )) 
-
-		// ㄴ 그리는 과정은 : 백도화지에서 이루어지므로, 렌더의 HDC는다른 HDC로 바뀌어야 함. 
+		
+		BitBlt(mHdc, 0, 0, mWidth, mHeight 
+			, mBackHdc, 0, 0, SRCCOPY);  
+		// ** 비트비트 함수(mHDC, 앞에가 원래 도화지 // 뒤에가 백버퍼 도화지 )) 
+		// 백버퍼 도화지의 시작 값부터 모든 영역 (SRCCOPY) 을 원래 도화지에 카피한다. 
+		// **그리는 과정은 : 백도화지에서 이루어지므로, 렌더의 HDC는다른 HDC로 바뀌어야 함**
 
 
 		// 원을 그릴것: main.cpp - WM_PAINT에 있던 그림 함수가 여기로.
