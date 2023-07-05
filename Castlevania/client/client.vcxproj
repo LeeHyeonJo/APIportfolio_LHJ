@@ -130,21 +130,33 @@
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="Commoninclude.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="consoleMath.h" />
     <ClInclude Include="console.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Gameobject.h" />
     <ClInclude Include="inputclass.h" />
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="newcircle.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Gameobject.cpp" />
     <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="newcircle.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="client.rc" />

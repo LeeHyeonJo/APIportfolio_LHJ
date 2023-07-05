@@ -71,6 +71,7 @@ namespace game
 
 			// 3. 화면에 내부를 채운 szFloat를 띄운다. 
 			TextOut(hdc, 10, 10, szFloat, strlen); // 배열을 길이만큼 띄운다.  
+			// 해결법: 매 프레임마다 띄워주는 방식으로 바꾸면 됨. 
 
 			timeCheck = 0.0f; 
 		}

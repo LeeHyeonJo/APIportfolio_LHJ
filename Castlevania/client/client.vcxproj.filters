@@ -60,6 +60,12 @@
     <ClInclude Include="newcircle.h">
       <Filter>Engine\Circle</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="Gameobject.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="client.ico">
@@ -88,5 +94,11 @@
     <ClCompile Include="newcircle.cpp">
       <Filter>Engine\Circle</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="Gameobject.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
 </Project>
