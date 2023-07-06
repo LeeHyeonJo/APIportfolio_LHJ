@@ -20,21 +20,23 @@
 
 namespace game::enums 
 {
-	enum class eLayer
+	enum class eLayerType
 	{
-			// 배경
-			// 배경
-			// 배경
-			// 등ㄷㅇ.. 
-
+		Background,
+		Player,
+		Monster,
+		Effect,
+		UI, 
+		End, 
 	};
 
 	// 두번째 이넘 클래스 
-	// 컴퍼넌트 용
+	// 컴퍼넌트안에서 생성될때, 만들어지는 녀석들의 이름을 붙여주는 용도. 
 	// 이거 순서는 유니티 라이프 사이클을 따라감. 
+	enum class eComponentType
+	{
+		Transform,
+		SpriteRenderer,
+		End,
+	};
 }
-
-// class 전방선언: 포인터 타입만 정의해줌. 
-// 다이나믹케스팅: 부모자식간의 형변환. 
-// 겟 컴포넌스: >> T에 찾으려는 타입. c는 부모 타입. 
-// 일치하면 반환, 안 일치하면 NULL반환. \\// 트랜스에선 위치가 바뀌고, 렌더레어서 트랜스만 가져옴. 

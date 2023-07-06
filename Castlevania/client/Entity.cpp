@@ -1,1 +1,14 @@
-#include "Entity.h" // 레이어에 상속해줌. 각 레이어에 이름을 붙임. 
+#include "Entity.h"
+
+namespace game
+{
+	Entity::Entity() // 생성자
+		: mName(L"") // 멤버 이니셜라이즈로 초기화
+	{
+	}
+
+	Entity::~Entity() // 소멸자 
+	{
+	}
+}
+

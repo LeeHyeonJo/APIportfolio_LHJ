@@ -28,6 +28,9 @@
     <Filter Include="Engine\Circle">
       <UniqueIdentifier>{25dfb4b8-98de-476d-b041-88db2936b83e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{fcedb1c7-ce2e-47ed-8be1-a5b30e7f7f10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">
@@ -61,11 +64,9 @@
       <Filter>Engine\Circle</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="Gameobject.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="client.ico">
@@ -95,10 +96,8 @@
       <Filter>Engine\Circle</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="Gameobject.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
