@@ -28,8 +28,11 @@
     <Filter Include="Engine\Circle">
       <UniqueIdentifier>{25dfb4b8-98de-476d-b041-88db2936b83e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entity">
+    <Filter Include="Engine\Entity">
       <UniqueIdentifier>{fcedb1c7-ce2e-47ed-8be1-a5b30e7f7f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\%2aScene">
+      <UniqueIdentifier>{96e6a19d-6211-4f72-ab78-ab08392b3ca3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +66,11 @@
     <ClInclude Include="newcircle.h">
       <Filter>Engine\Circle</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h" />
     <ClInclude Include="Entity.h">
-      <Filter>Entity</Filter>
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\%2aScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +100,11 @@
     <ClCompile Include="newcircle.cpp">
       <Filter>Engine\Circle</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Entity.cpp">
-      <Filter>Entity</Filter>
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\%2aScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
