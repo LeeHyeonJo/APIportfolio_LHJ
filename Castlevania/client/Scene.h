@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h" // 여기에 commoninclude 들어있음 
+#include "Layer.h" 
 
 // 엔티티를 상속 받는다
 // 씬 > 레이어(벡터배열) > 게임 오브젝트(벡터배열) > 게임 컴포넌트(트랜스/렌더)
@@ -21,6 +22,9 @@ namespace game
 
 	private:
 		std::vector<Layer>mLayers;
-		// 벡터형 배열
+		// 벡터 배열, 자료형은 Layer
+
+		// 자료형 Layer 
+		// each for문을 사용할때 참조 (&)로 서치 
 	};
 }

@@ -34,8 +34,11 @@
     <Filter Include="Engine\Scene%2a">
       <UniqueIdentifier>{96e6a19d-6211-4f72-ab78-ab08392b3ca3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\%2aLayer">
+    <Filter Include="Engine\Layer%2a">
       <UniqueIdentifier>{5fab68fb-e169-425b-bda9-ad3412b999cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\%2aGameobject">
+      <UniqueIdentifier>{2fd96bd8-7131-4c42-a8ae-81acfd4cd62e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +79,10 @@
       <Filter>Engine\Scene%2a</Filter>
     </ClInclude>
     <ClInclude Include="Layer.h">
-      <Filter>Engine\%2aLayer</Filter>
+      <Filter>Engine\Layer%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameobject.h">
+      <Filter>Engine\%2aGameobject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +119,10 @@
       <Filter>Engine\Scene%2a</Filter>
     </ClCompile>
     <ClCompile Include="Layer.cpp">
-      <Filter>Engine\%2aLayer</Filter>
+      <Filter>Engine\Layer%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameobject.cpp">
+      <Filter>Engine\%2aGameobject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

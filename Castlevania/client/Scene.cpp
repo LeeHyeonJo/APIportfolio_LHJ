@@ -3,6 +3,9 @@
 // 목적: 씬 헤더에서 구현한 함수가 돌아가야 함
 // Layer에 관련된 처리를 함. 
 
+// 씬의 헤더에서 레이어의 헤더를 선언함. 따라서 씬의 cpp에서도 사용 가능. 
+// 이제 레이어를 구현하면 됨. 
+
 namespace game
 {
 	Scene::Scene()
@@ -21,7 +24,10 @@ namespace game
 	// 할당된 레이어 배열(0~5)에 "게임 오브젝트"를 넣어준다.  
 	void Scene::Initialize() 
 	{
-		mLayers[(int)enums::eLayerType::Player].Addgameobject; 
+		mLayers[(int)enums::eLayerType::Player].Addgameobject(); 
+		// ***레이어의 헤더에 구현
+		// 이니셜에 들어가면 안됨!!: 이니셜은 한번만 돌아감
+		// 게임오브젝트 추가는 여러번 쓸 함수이므로 헤더에 구현됨. 
 	}
 
 	// 씬 업데이트: 모든 레이어 배열을 돌면서, 레이어를 "업데이트" 한다. 
