@@ -17,26 +17,16 @@
 #include "consoleMath.h" 
 #include "Time.h"
 
-
-namespace game::enums 
+namespace game::enums // 이넘 클래스인걸 표기하려고 이름을 이렇게 붙임 
 {
 	enum class eLayerType
 	{
-		Background,
+		Background, //0
 		Player,
 		Monster,
 		Effect,
-		UI, 
-		End, 
-	};
-
-	// 두번째 이넘 클래스 
-	// 컴퍼넌트안에서 생성될때, 만들어지는 녀석들의 이름을 붙여주는 용도. 
-	// 이거 순서는 유니티 라이프 사이클을 따라감. 
-	enum class eComponentType
-	{
-		Transform,
-		SpriteRenderer,
-		End,
+		UI,
+		End, //5 (~6개)
 	};
 }
+

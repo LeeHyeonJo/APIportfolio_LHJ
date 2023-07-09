@@ -15,7 +15,7 @@ namespace game
 		// ㄴ 최상위 부모. 상속 쭉 내려줄거라 앞에 virtual 붙임
 		// ㄴ 이녀석을 상속받은 자식들도 앞에 virtual이 붙는다. 
 
-		void SetNmae (std::wstring& name) // 상속한 자식들의 이름 붙이는 역할 
+		void Setname (std::wstring& name) // 상속한 자식들의 이름 붙이는 역할 
 		{
 			mName = name; 
 		}
