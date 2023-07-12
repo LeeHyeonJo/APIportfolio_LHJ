@@ -40,6 +40,15 @@
     <Filter Include="Engine\%2aGameobject">
       <UniqueIdentifier>{2fd96bd8-7131-4c42-a8ae-81acfd4cd62e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{e70933cf-6270-47b0-8b28-87c6a7cb9cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{5e1e4c4b-df61-4ec0-98a5-abf60917ce2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Spriterenderer">
+      <UniqueIdentifier>{12e4aee0-47c7-4d77-b179-c19bb697e0f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h">

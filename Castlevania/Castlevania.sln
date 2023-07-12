@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 		MEMO.txt = MEMO.txt
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{F3089029-1130-4857-B66F-DF2B5E352E65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -27,6 +29,14 @@ Global
 		{B7C70060-4759-4253-982D-F35EE3C368E0}.Release|x64.Build.0 = Release|x64
 		{B7C70060-4759-4253-982D-F35EE3C368E0}.Release|x86.ActiveCfg = Release|Win32
 		{B7C70060-4759-4253-982D-F35EE3C368E0}.Release|x86.Build.0 = Release|Win32
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Debug|x64.ActiveCfg = Debug|x64
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Debug|x64.Build.0 = Debug|x64
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Debug|x86.ActiveCfg = Debug|Win32
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Debug|x86.Build.0 = Debug|Win32
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Release|x64.ActiveCfg = Release|x64
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Release|x64.Build.0 = Release|x64
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Release|x86.ActiveCfg = Release|Win32
+		{F3089029-1130-4857-B66F-DF2B5E352E65}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

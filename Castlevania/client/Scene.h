@@ -23,6 +23,7 @@ namespace game
 	private:
 		std::vector<Layer>mLayers;
 		// 벡터 배열, 자료형은 Layer
+		// ㄴ 나중에 질문하기. 이건 왜 Layer 형태 그대로? 
 
 		// 자료형 Layer 
 		// each for문을 사용할때 참조 (&)로 서치 
